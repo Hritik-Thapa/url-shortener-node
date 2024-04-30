@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shortener</title>
+    <style>
+        th,td{
+            border:1px solid black;
+        }
+        table{
+            margin:10px
+        }
+    </style>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+    <% if (locals.data.id) { %>
+        <p>Your shortened url is http://localhost:9999/url/<%= data.id %></p>
+    <% } %>
+    <div>
+        <form method="POST" action="/url">
+            <label>Enter the original url</label>
+            <input type="text" placeholder="www.examle.com" name="redirectUrl">
+            <button type="submit">Generate</button>
+        </form>
+    </div>
+    <table style="border:1px solid black">
+        <thead style="border:1px solid black">
+            <th>S.N.</th>
+            <th>Short Id</th>
+            <th>Redirect Url</th>
+            <th>Clicks</th>
+        </thead>
+        <% data.urls.forEach((e,i)=>{ %>
+            <tr>
+                <td><%=  i+1 %></td>
+                <td><%=  e.shortId %></td>
+                <td><%=  e.redirectUrl %></td>
+                <td><%=  e.visitHistory.length %></td>
+            </tr>
+        <%}) %> 
+    </table>
+        
+    <ol>
+    
+    </ol>
+</body>
+</html>
