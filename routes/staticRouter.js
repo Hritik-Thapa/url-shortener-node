@@ -6,9 +6,17 @@ const router=express.Router();
 
 
 router.get('/',async (req,res)=>{
-    const urlList= await url.find({})
-    const data={urls:urlList}
-    return res.render('home',{data});
+    if(!req.user) res.redirect('/login')
+    const urlList= await url.find({createdBy:req.user._id})
+    return res.render('home',{urls:urlList});
 })
+
+router.get('/register',(req,res)=> {
+    return  res.render("register");
+ });
+
+ router.get('/login',(req,res)=> {
+    return  res.render("login");
+ });
 
 module.exports=router;

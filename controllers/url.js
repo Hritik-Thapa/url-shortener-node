@@ -15,10 +15,11 @@ async function handleGenerateShortId(req, res) {
     shortId: short_id,
     redirectUrl: body,
     visitHistory: [],
+    createdBy:req.user._id
   });
   const urlList= await url.findOne({});
-  const data={ id: short_id ,urls:urlList}
-  return res.render("home", {data});
+  // const data={ id: short_id ,urls:urlList}
+  return res.render("home", {id: short_id});
 }
 
 async function handleRedirectUrl(req, res) {
